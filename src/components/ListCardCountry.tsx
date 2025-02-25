@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import Country from "./Country";
 import CardCountry from "./CardCountry";
 import Filters from "./Filters";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 type FilterFunction = (c: Country) => boolean;
 
 export default function ListCardContry() {
   const [cardsData, setCardsData] = useState<Country[]>([]);
-  const [filtro, setFiltro] = useState<FilterFunction>(() => () => true);
+  const [filtros, setFiltros] = useState<FilterFunction[]>([() => true]);
   const [subregiones, setSubRegiones] = useState<string[]>(["Todos"]);
 
-  const handleFilterChange = (newFilter: FilterFunction) => {
-    setFiltro(() => newFilter);
+  const handleFilterChange = (newFilter: FilterFunction[]) => {
+    setFiltros(() => newFilter);
   };
 
   useEffect(() => {
@@ -38,17 +38,26 @@ export default function ListCardContry() {
           onFilterChange={handleFilterChange}
           subRegionesOptions={subregiones}
         />
+        <Typography variant="body2" sx={{ p: 1 }}>
+          {`Cantidad ${
+            cardsData.filter((c: Country) =>
+              filtros.some((fn: FilterFunction) => fn(c))
+            ).length
+          }`}{" "}
+        </Typography>
       </Box>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {cardsData.filter(filtro).map((c: Country) => (
-          <Grid key={c.numericCode} size={{ xs: 2, sm: 4, md: 4 }}>
-            <CardCountry country={c}></CardCountry>
-          </Grid>
-        ))}
+        {cardsData
+          .filter((c: Country) => filtros.some((fn: FilterFunction) => fn(c)))
+          .map((c: Country) => (
+            <Grid key={c.numericCode} size={{ xs: 2, sm: 4, md: 4 }}>
+              <CardCountry country={c}></CardCountry>
+            </Grid>
+          ))}
       </Grid>
     </>
   );
