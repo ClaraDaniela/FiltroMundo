@@ -1,64 +1,124 @@
 export default interface Country {
-  name: string;
-  topLevelDomain: string[];
-  alpha2Code: string;
-  alpha3Code: string;
-  callingCodes: string[];
-  capital: string;
-  altSpellings: string[];
-  subregion: string;
-  region: string;
-  population: number;
-  latlng: number[];
-  demonym: string;
-  area: number;
-  timezones: string[];
-  borders: string[];
-  nativeName: string;
-  numericCode: string;
-  flags: Flags;
-  currencies: Currency[];
-  languages: Language[];
-  translations: Translations;
-  flag: string;
-  regionalBlocs: RegionalBloc[];
-  cioc: string;
+  name: Name;
+  tld: string[];
+  cca2: string;
+  ccn3: string;
+  cca3: string;
   independent: boolean;
+  status: string;
+  unMember: boolean;
+  currencies: Currencies;
+  idd: Idd;
+  capital: string[];
+  altSpellings: string[];
+  region: string;
+  subregion: string;
+  languages: Languages;
+  translations: Translations;
+  latlng: number[];
+  landlocked: boolean;
+  area: number;
+  demonyms: Demonyms;
+  flag: string;
+  maps: Maps;
+  population: number;
+  car: Car;
+  timezones: string[];
+  continents: string[];
+  flags: Flags;
+  coatOfArms: CoatOfArms;
+  startOfWeek: string;
+  capitalInfo: CapitalInfo;
 }
 
-interface RegionalBloc {
-  acronym: string;
-  name: string;
+interface CapitalInfo {
+  latlng: number[];
+}
+
+interface CoatOfArms {
+}
+
+interface Flags {
+  png: string;
+  svg: string;
+}
+
+interface Car {
+  signs: string[];
+  side: string;
+}
+
+interface Maps {
+  googleMaps: string;
+  openStreetMaps: string;
+}
+
+interface Demonyms {
+  eng: Eng2;
+}
+
+interface Eng2 {
+  f: string;
+  m: string;
 }
 
 interface Translations {
-  br: string;
-  pt: string;
-  nl: string;
-  hr: string;
-  fa: string;
-  de: string;
-  es: string;
-  fr: string;
-  ja: string;
-  it: string;
-  hu: string;
+  ara: Eng;
+  bre: Eng;
+  ces: Eng;
+  cym: Eng;
+  deu: Eng;
+  est: Eng;
+  fin: Eng;
+  fra: Eng;
+  hrv: Eng;
+  hun: Eng;
+  ita: Eng;
+  jpn: Eng;
+  kor: Eng;
+  nld: Eng;
+  per: Eng;
+  pol: Eng;
+  por: Eng;
+  rus: Eng;
+  slk: Eng;
+  spa: Eng;
+  srp: Eng;
+  swe: Eng;
+  tur: Eng;
+  urd: Eng;
+  zho: Eng;
 }
 
-interface Language {
-  iso639_1: string;
-  iso639_2: string;
-  name: string;
-  nativeName: string;
+interface Languages {
+  eng: string;
 }
 
-interface Currency {
-  code: string;
+interface Idd {
+  root: string;
+  suffixes: string[];
+}
+
+interface Currencies {
+  SHP: SHP;
+}
+
+interface SHP {
   name: string;
   symbol: string;
 }
 
-interface Flags {
-  svg: string;
-  png: string;
+interface Name {
+  common: string;
+  official: string;
+  nativeName: NativeName;
+}
+
+interface NativeName {
+  eng: Eng;
+}
+
+interface Eng {
+  official: string;
+  common: string;
 }

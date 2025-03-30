@@ -18,7 +18,7 @@ export default function ListCardContry() {
 
   useEffect(() => {
     const getData = async () => {
-      await fetch("/data/paises.json")
+      await fetch("https://restcountries.com/v3.1/all")
         .then((response) => response.json())
         .then((data) => {
           setCardsData(data);
@@ -54,7 +54,7 @@ export default function ListCardContry() {
         {cardsData
           .filter((c: Country) => filtros.some((fn: FilterFunction) => fn(c)))
           .map((c: Country) => (
-            <Grid key={c.numericCode} size={{ xs: 2, sm: 4, md: 4 }}>
+            <Grid key={c.ccn3} size={{ xs: 2, sm: 4, md: 4 }}>
               <CardCountry country={c}></CardCountry>
             </Grid>
           ))}

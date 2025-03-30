@@ -29,10 +29,10 @@ export default function CardCountry({ country }: CardCountryProps) {
   };
   return (
     <Card>
-      <CardHeader title={country.name}></CardHeader>
+      <CardHeader title={country.name.common} subheader={country.region}></CardHeader>
       <CardMedia
         component="img"
-        alt={country.name}
+        alt={country.name.common}
         height="140"
         image={country.flags.png}
       />
@@ -52,11 +52,11 @@ export default function CardCountry({ country }: CardCountryProps) {
           <Typography
             sx={{ marginBottom: 2 }}
             variant="body2"
-          >{`Nombre Nativo: ${country.nativeName}`}</Typography>
+          >{`Nombre Nativo: ${country?.name?.nativeName?.eng?.common || "No disponible."}`}</Typography>
           <Typography
             sx={{ marginBottom: 2 }}
             variant="body2"
-          >{`alpha3Code: ${country.alpha3Code}`}</Typography>
+          >{`alpha3Code: ${country.ccn3}`}</Typography>
           <Typography
             sx={{ marginBottom: 2 }}
             variant="body2"
@@ -65,6 +65,10 @@ export default function CardCountry({ country }: CardCountryProps) {
             sx={{ marginBottom: 2 }}
             variant="body2"
           >{`Poblacion: ${country.population}`}</Typography>
+          <Typography
+            sx={{ marginBottom: 2 }}
+            variant="body2"
+          >{`Lenguajes: ${country?.languages?.eng || "No disponible."}`}</Typography>
         </CardContent>
       </Collapse>
     </Card>
